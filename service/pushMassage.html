@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>服务端页面发送数据</title>
+</head>
+<body>
+<form action="http://127.0.0.1:3000">
+    <textarea id="message" cols="30" rows="5"></textarea>
+    <input type="button" value="发送" onclick="t_push()">
+</form>
+<script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://127.0.0.1:3000');
+    var message = document.getElementById('message');
+    function t_push(){
+        socket.emit('message',{text:message.value});
+        document.getElementById('message').value = '';
+    }
+
+</script>
+</body>
+</html>
